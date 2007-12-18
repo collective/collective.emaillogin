@@ -1,0 +1,15 @@
+README.txt
+setup.cfg
+setup.py
+collective/__init__.py
+collective.emaillogin.egg-info/PKG-INFO
+collective.emaillogin.egg-info/SOURCES.txt
+collective.emaillogin.egg-info/dependency_links.txt
+collective.emaillogin.egg-info/entry_points.txt
+collective.emaillogin.egg-info/namespace_packages.txt
+collective.emaillogin.egg-info/not-zip-safe
+collective.emaillogin.egg-info/paster_plugins.txt
+collective.emaillogin.egg-info/requires.txt
+collective.emaillogin.egg-info/top_level.txt
+collective/emaillogin/__init__.py
+collective/emaillogin/tests.py

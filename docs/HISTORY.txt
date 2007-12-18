@@ -1,0 +1,9 @@
+Changelog for collective.emaillogin
+
+    (name of developer listed in brackets)
+
+collective.emaillogin - 0.1 Unreleased
+
+    - Initial package structure.
+      [zopeskel]
+

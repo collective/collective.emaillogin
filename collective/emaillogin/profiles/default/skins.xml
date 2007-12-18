@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<object name="portal_skins" allow_any="False" cookie_persistence="False"
+   default_skin="emaillogin">
+
+ <object name="emaillogin"
+    meta_type="Filesystem Directory View"
+    directory="collection.emaillogin:skins/emaillogin"/>
+
+ <skin-path name="emaillogin" based-on="Plone Default">
+  <layer name="emaillogin"
+     insert-after="custom"/>
+ </skin-path>
+
+</object>
+
