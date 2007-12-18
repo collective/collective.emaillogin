@@ -4,7 +4,7 @@
 
  <object name="emaillogin"
     meta_type="Filesystem Directory View"
-    directory="collection.emaillogin:skins/emaillogin"/>
+    directory="collective.emaillogin:skins/emaillogin"/>
 
  <skin-path name="emaillogin" based-on="Plone Default">
   <layer name="emaillogin"
