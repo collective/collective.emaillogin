@@ -20,7 +20,7 @@ def initialize(context):
         return
     # XXX rather nasty patch to allow email addresses as username
     RegistrationTool._ALLOWED_MEMBER_ID_PATTERN = re.compile(
-        r'^\w[\w\.\-@]+[a-zA-Z]$')
+        r'^\w[\w\.\-\+@]+[a-zA-Z]$')
 
     # XXX another nasty one: monkey-patch CMF's MemberData object to allow
     # changing the login name of users from Python scripts
