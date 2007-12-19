@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '0.1'
+version = open('collective/emaillogin/version.txt').read().strip()
 
 setup(name='collective.emaillogin',
       version=version,
