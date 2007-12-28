@@ -4,9 +4,13 @@ from Products.CMFCore.MemberDataTool import MemberData
 from Products.CMFCore.permissions import SetOwnProperties
 from Products.CMFCore.utils import getToolByName
 from AccessControl import getSecurityManager
+from zope.i18nmessageid import MessageFactory
 
 import os
 here = os.path.abspath(os.path.dirname(__file__))
+
+MessageFactory = _ = MessageFactory('collective.emaillogin')
+
 
 def initialize(context):
     enable = open(os.path.join(here, 'enable.cfg')).read()
