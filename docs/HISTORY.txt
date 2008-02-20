@@ -1,9 +1,15 @@
 Changelog for collective.emaillogin
+===================================
 
     (name of developer listed in brackets)
 
-collective.emaillogin - 0.1 Unreleased
+collective.emaillogin - 0.2 Unreleased
+--------------------------------------
 
-    - Initial package structure.
-      [zopeskel]
+
+collective.emaillogin - 0.1 Released 2008-01-15
+-----------------------------------------------
+
+    - Initial release
+      [maurits, guido]
 
