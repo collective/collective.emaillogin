@@ -2,7 +2,7 @@ Changelog for collective.emaillogin
 ===================================
 
 
-0.3 (unreleased)
+0.3 (2009-05-05)
 ----------------
 
 - Removed personalize_form.cpt(.metadata) as there was no important
