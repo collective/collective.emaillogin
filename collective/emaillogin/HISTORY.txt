@@ -5,7 +5,8 @@ Changelog for collective.emaillogin
 0.4 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Also show the error when the email address is not a valid username.
+  [maurits+mike]
 
 
 0.3 (2009-05-05)

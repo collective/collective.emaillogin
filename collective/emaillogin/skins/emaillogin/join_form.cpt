@@ -82,7 +82,7 @@
       </div>
 
       <div class="field"
-           tal:define="error errors/email | nothing;
+           tal:define="error errors/email | errors/username | nothing;
                        email request/email | nothing;"
            tal:attributes="class python:test(error, 'field error', 'field')">
 
