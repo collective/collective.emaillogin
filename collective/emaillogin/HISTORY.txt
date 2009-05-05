@@ -2,7 +2,7 @@ Changelog for collective.emaillogin
 ===================================
 
 
-0.2 (unreleased)
+0.2 (2009-05-05)
 ----------------
 
 - No longer register our own skin path (skin selection), but just add
