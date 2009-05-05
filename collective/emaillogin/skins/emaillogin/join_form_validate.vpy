@@ -9,7 +9,7 @@
 ##title=validates the Registration of a User
 
 from Products.CMFPlone import PloneMessageFactory as PMF
-from collective.emaillogin import EmailLoginMessageFactory as _
+from collective.emaillogin.utils import EmailLoginMessageFactory as _
 
 reg_tool=context.portal_registration
 def missing(field):
