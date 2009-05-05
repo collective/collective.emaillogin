@@ -5,6 +5,9 @@ Changelog for collective.emaillogin
 0.3 (unreleased)
 ----------------
 
+- Take over a small change in default Plone to the personalize.cpy.
+  [maurits+mike]
+
 - Fixed join form to also work in newer Plones by using the
   @@authenticator provider for protecting this join form.  Keeps
   working in Plone 3.0 as well (which does not use plone.protect).
