@@ -4,12 +4,20 @@ from Products.CMFCore.MemberDataTool import MemberData
 from Products.CMFCore.permissions import SetOwnProperties
 from Products.CMFCore.utils import getToolByName
 from AccessControl import getSecurityManager
-from zope.i18nmessageid import MessageFactory
+from AccessControl import Unauthorized
+from AccessControl import allow_module
+
+from collective.emaillogin import utils
 
 import os
 here = os.path.abspath(os.path.dirname(__file__))
 
-MessageFactory = _ = MessageFactory('collective.emaillogin')
+# Allow to import utils.py from restricted python , mostly for the
+# message factory:
+allow_module('collective.emaillogin.utils')
+
+# And we use that factory in this init as well:
+_ = utils.EmailLoginMessageFactory
 
 
 def initialize(context):
@@ -59,7 +67,9 @@ def initialize(context):
             return
         regtool = getToolByName(self, 'portal_registration')
         if not regtool.isMemberIdAllowed(loginname):
-            raise ValueError(_('username is not valid, or already in use'))
+            raise ValueError(_(
+                    'message_user_name_not_valid', 
+                    u"User name is not valid, or already in use."))
         userfolder = self.acl_users.source_users
         try:
             userfolder.getUserIdForLogin(loginname)
@@ -67,6 +77,7 @@ def initialize(context):
             pass
         else:
             # let's stay a little vague here, don't give away too much info
-            raise ValueError(_('username is not valid, or already in use'))
+            raise ValueError(_(
+                    'message_user_name_not_valid', 
+                    u"User name is not valid, or already in use."))
     MemberData.validateLoginName = validateLoginName
-
