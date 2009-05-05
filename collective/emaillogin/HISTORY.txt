@@ -1,15 +1,18 @@
 Changelog for collective.emaillogin
 ===================================
 
-    (name of developer listed in brackets)
 
-collective.emaillogin - 0.2 Unreleased
---------------------------------------
+0.2 (unreleased)
+----------------
+
+- No longer register our own skin path (skin selection), but just add
+  our emaillogin skin layer to the existing skin selections.
+  [maurits+mike]
 
 
-collective.emaillogin - 0.1 Released 2008-01-15
------------------------------------------------
+0.1 (2008-01-15)
+----------------
 
-    - Initial release
-      [maurits, guido]
+- Initial release.
+  [maurits, guido]
 
