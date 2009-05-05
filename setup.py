@@ -4,11 +4,13 @@ import os.path
 versionfile = os.path.join('collective', 'emaillogin', 'version.txt')
 version = open(versionfile).read().strip()
 
+historyfile = os.path.join('collective', 'emaillogin', 'HISTORY.txt')
+history = open(historyfile).read().strip()
+
 setup(name='collective.emaillogin',
       version=version,
       description="Allow logins with email address rather than login name.",
-      long_description="""\
-""",
+      long_description=history,
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Framework :: Plone",
