@@ -5,8 +5,10 @@ Changelog for collective.emaillogin
 0.3 (unreleased)
 ----------------
 
+- Removed personalize_form.cpt(.metadata) as there was no important
+  difference with the one from default Plone.  [maurits+mike]
+
 - Take over a small change in default Plone to the personalize.cpy.
-  [maurits+mike]
 
 - Fixed join form to also work in newer Plones by using the
   @@authenticator provider for protecting this join form.  Keeps
