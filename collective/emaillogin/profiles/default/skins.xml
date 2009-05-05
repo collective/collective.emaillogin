@@ -6,7 +6,7 @@
     meta_type="Filesystem Directory View"
     directory="collective.emaillogin:skins/emaillogin"/>
 
- <skin-path name="emaillogin" based-on="Plone Default">
+ <skin-path name="*">
   <layer name="emaillogin"
      insert-after="custom"/>
  </skin-path>
