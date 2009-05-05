@@ -5,7 +5,10 @@ Changelog for collective.emaillogin
 0.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Fixed join form to also work in newer Plones by using the
+  @@authenticator provider for protecting this join form.  Keeps
+  working in Plone 3.0 as well (which does not use plone.protect).
+  [maurits+mike]
 
 
 0.2 (2009-05-05)
