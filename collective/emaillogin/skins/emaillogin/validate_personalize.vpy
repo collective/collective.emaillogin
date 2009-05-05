@@ -34,7 +34,7 @@ else:
 if not state.getError('email') and not reg_tool.isMemberIdAllowed(username):
     state.setError(
         'email',
-        _('message_email_already_in_use_',
+        _('message_email_in_use',
           u"The email address you selected is already in use or is not valid "
           "as login name. Please choose another."),
         'email_invalid' )
