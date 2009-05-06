@@ -1,4 +1,2 @@
-* When installing this (at least in Plone 3.2.2) the skin selection is
-  broken and you cannot e.g. look at the front-page, because
-  document_view cannot be found.  Simply adding emaillogin manually to
-  the skin selection works.
+- Add tests.  There are some tests in a customer package of Zest
+  Software.

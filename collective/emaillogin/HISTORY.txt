@@ -5,6 +5,9 @@ Changelog for collective.emaillogin
 0.5 (unreleased)
 ----------------
 
+- Fixed error on reinstall where the default skin would be set to the
+  no longer existing emaillogin skin.  [maurits]
+
 - Added profiles/default/metadata.xml: version = 1.  [maurits]
 
 - After a successfull edit of the personalize form, do not travere to
