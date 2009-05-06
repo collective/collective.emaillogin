@@ -2,7 +2,7 @@ Changelog for collective.emaillogin
 ===================================
 
 
-0.5 (unreleased)
+0.5 (2009-05-06)
 ----------------
 
 - Fixed error on reinstall where the default skin would be set to the
