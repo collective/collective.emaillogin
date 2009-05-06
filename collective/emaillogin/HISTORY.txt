@@ -5,6 +5,12 @@ Changelog for collective.emaillogin
 0.5 (unreleased)
 ----------------
 
+- After a successfull edit of the personalize form, do not travere to
+  the personalize_form, but redirect to it.  This solves an error
+  "Forbidden: Form authenticator is invalid." when changing your email
+  address (= login name) and then saving the form a second time.
+  [maurits]
+
 - Changed validate_personalize.vpy to allow changing your preferences
   again.  [maurits]
 
