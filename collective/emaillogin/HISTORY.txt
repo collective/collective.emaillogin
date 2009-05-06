@@ -5,6 +5,8 @@ Changelog for collective.emaillogin
 0.5 (unreleased)
 ----------------
 
+- Added profiles/default/metadata.xml: version = 1.  [maurits]
+
 - After a successfull edit of the personalize form, do not travere to
   the personalize_form, but redirect to it.  This solves an error
   "Forbidden: Form authenticator is invalid." when changing your email
