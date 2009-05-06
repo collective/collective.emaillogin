@@ -5,6 +5,9 @@ Changelog for collective.emaillogin
 0.5 (unreleased)
 ----------------
 
+- Changed validate_personalize.vpy to allow changing your preferences
+  again.  [maurits]
+
 - Adapted validate_personalize.vpy.  Change compared to default Plone:
   check the validity of the email address as a login name.  [maurits]
 

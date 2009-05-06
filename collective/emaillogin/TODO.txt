@@ -2,6 +2,3 @@
   broken and you cannot e.g. look at the front-page, because
   document_view cannot be found.  Simply adding emaillogin manually to
   the skin selection works.
-
-* You cannot change your preferences, as we will now complain that the
-  (unchanged) email address is already in use...
