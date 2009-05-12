@@ -103,8 +103,8 @@ If you do not have an account here, head over to the
              tal:define="error python:errors.get(ac_name, None);"
              tal:attributes="class python:test(error, 'field error', 'field')">
 
-            <label i18n:translate="label_login_name"
-                   tal:attributes="for ac_name">Login Name</label>
+            <label i18n:translate="label_email"
+                   tal:attributes="for ac_name">E-mail</label>
 
             <div tal:content="error">Validation error output</div>
 
@@ -146,9 +146,10 @@ If you do not have an account here, head over to the
 
             <label for="cb_remember" i18n:translate="label_remember_my_name">Remember my name.</label>
 
-            <div i18n:translate="help_remember_my_name"
+            <div i18n:translate="help_remember_my_email"
+                 i18n:domain="emaillogin"
                  class="formHelp">
-                Check this to have your user name filled in automatically when you log in later.
+                Check this to have your email address filled in automatically when you log in later.
             </div>
 
         </div>
