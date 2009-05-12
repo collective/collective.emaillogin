@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.emaillogin 0.5\n"
-"POT-Creation-Date: 2009-05-12 15:17+0000\n"
+"POT-Creation-Date: 2009-05-12 15:30+0000\n"
 "PO-Revision-Date: 2009-05-12 15:58 +0200\n"
 "Last-Translator: Maurits van Rees <m.van.rees@zestsoftware.nl>\n"
 "Language-Team: Zest Software <info@zestsoftware.nl>\n"
@@ -41,6 +41,11 @@ msgstr "De keuze  'Mijn e-mailadres onthouden' maakt een cookie aan met het e-ma
 #: ./skins/emaillogin/pwreset_form.cpt:40
 msgid "help_verify_email"
 msgstr "Vul uw e-mailadres in voor verificatie"
+
+#. Default: "My email address"
+#: ./skins/emaillogin/pwreset_form.cpt:35
+msgid "label_my_email_address"
+msgstr "Mijn e-mailadres"
 
 #. Default: "My email address is"
 #: ./skins/emaillogin/mail_password_form.pt:35

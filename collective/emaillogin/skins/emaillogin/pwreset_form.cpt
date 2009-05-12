@@ -33,8 +33,8 @@
 	                   tal:condition="here/portal_password_reset/checkUser | nothing">
                      
                     <label for="userid" 
-                           i18n:translate="label_my_email_address_is"
-                           i18n:domain="collective.emaillogin">My email address is</label>
+                           i18n:translate="label_my_email_address"
+                           i18n:domain="collective.emaillogin">My email address</label>
 	                   <div tal:content="error">Validation error output</div>
 
                     <div class="formHelp"
