@@ -3,3 +3,7 @@
 
 - Show e-mail address instead of login name in the login portlet.
   I tried something with IThemeSpecific but failed.
+
+- Make email address case insensitive: you should always use lower
+  case.
+

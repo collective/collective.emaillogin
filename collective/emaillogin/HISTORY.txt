@@ -5,7 +5,8 @@ Changelog for collective.emaillogin
 0.6 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Use email address instead of login/user name in some more spots,
+  like the login form and in validation.  [maurits]
 
 
 0.5 (2009-05-06)

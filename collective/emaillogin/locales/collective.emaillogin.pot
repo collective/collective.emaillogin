@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2009-05-05 16:52+0000\n"
+"POT-Creation-Date: 2009-05-12 13:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,18 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.emaillogin\n"
+
+#: ./skins/emaillogin/login_form_validate.vpy:45
+msgid "Email address not found."
+msgstr ""
+
+#: ./skins/emaillogin/logged_in.cpy:19
+msgid "Login failed. Password is case sensitive, check that caps lock is not enabled."
+msgstr ""
+
+#: ./skins/emaillogin/login_form_validate.vpy:38
+msgid "Please enter your email address."
+msgstr ""
 
 #. Default: "The email address you selected is already in use or is not valid as login name. Please choose another."
 #: ./skins/emaillogin/join_form_validate.vpy:50

@@ -9,7 +9,8 @@
 ##title=Validate login
 ##
 
-from Products.CMFPlone import PloneMessageFactory as _
+from Products.CMFPlone import PloneMessageFactory as PMF
+from collective.emaillogin.utils import EmailLoginMessageFactory as _
 
 request = context.REQUEST
 js_enabled = request.get('js_enabled',0) # is javascript enabled?
@@ -18,7 +19,7 @@ cookies_enabled = request.get('cookies_enabled',0) # are cookies enabled?
 cookies_enabled = cookies_enabled=='1' or cookies_enabled==1
 
 if js_enabled and not cookies_enabled:
-    context.plone_utils.addPortalMessage(_(u'You must enable cookies before you can log in.'), 'error')
+    context.plone_utils.addPortalMessage(PMF(u'You must enable cookies before you can log in.'), 'error')
     state.set(status='enable_cookies')
     return state
 
@@ -34,20 +35,20 @@ if mt.isAnonymousUser():
 
             if not user_name:
                 # no user name
-                state.setError(ac_name, _(u'Please enter your login name.'), 'login_name_required')
+                state.setError(ac_name, _(u'Please enter your email address.'), 'email_address_required')
             if password_empty:
-                state.setError(ac_password, _(u'Please enter your password.'), 'password_required')
+                state.setError(ac_password, PMF(u'Please enter your password.'), 'password_required')
             verify_login_name = context.portal_properties.site_properties.getProperty('verify_login_name', 0)
             if user_name and verify_login_name:
                 # XXX mixing up username and loginname here
                 if mt.getMemberById(user_name) is None:
-                    state.setError(ac_name, _(u'Login name not found.'), 'login_name_not_found')
+                    state.setError(ac_name, _(u'Email address not found.'), 'email_address_not_found')
                 elif not password_empty:
-                    state.setError(ac_password, _(u'Password incorrect.'), 'password_incorrect')
-        context.plone_utils.addPortalMessage(_(u'Login failed. Both login name and password are case sensitive, check that caps lock is not enabled.'), 'error')
+                    state.setError(ac_password, PMF(u'Password incorrect.'), 'password_incorrect')
+        context.plone_utils.addPortalMessage(_(u'Login failed. Password is case sensitive, check that caps lock is not enabled.'), 'error')
         state.set(status='failure')
     else: # no javascript - do low tech login failure
-        context.plone_utils.addPortalMessage(_(u'Login failed. Both login name and password are case sensitive, check that caps lock is not enabled.'), 'error')
+        context.plone_utils.addPortalMessage(_(u'Login failed. Password is case sensitive, check that caps lock is not enabled.'), 'error')
         state.set(status='failure_page')
 
 return state

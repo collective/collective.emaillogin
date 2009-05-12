@@ -10,13 +10,13 @@
 ##
 
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone import PloneMessageFactory as _
+from collective.emaillogin.utils import EmailLoginMessageFactory as _
 REQUEST=context.REQUEST
 
 membership_tool=getToolByName(context, 'portal_membership')
 if membership_tool.isAnonymousUser():
     REQUEST.RESPONSE.expireCookie('__ac', path='/')
-    context.plone_utils.addPortalMessage(_(u'Login failed. Both login name and password are case sensitive, check that caps lock is not enabled.'), 'error')
+    context.plone_utils.addPortalMessage(_(u'Login failed. Password is case sensitive, check that caps lock is not enabled.'), 'error')
     return state.set(status='failure')
 
 member = membership_tool.getAuthenticatedMember()
