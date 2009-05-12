@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2009-05-12 15:11+0000\n"
+"POT-Creation-Date: 2009-05-12 15:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,6 +57,11 @@ msgstr ""
 #. Default: "The email address you selected is already in use or is not valid as login name. Please choose another."
 #: ./skins/emaillogin/join_form_validate.vpy:50
 msgid "message_email_in_use"
+msgstr ""
+
+#. Default: "Sorry, this appears to be an invalid request. Please make sure you copied the URL exactly as it appears in your email and that you entered your email address correctly."
+#: ./skins/emaillogin/pwreset_invalid.pt:11
+msgid "message_pwreset_invalid"
 msgstr ""
 
 #. Default: "User name is not valid, or already in use."

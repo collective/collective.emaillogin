@@ -8,10 +8,11 @@
 
     <h1 i18n:translate="heading_pwreset_invalid">Error setting password</h1>
 
-    <p i18n:translate="message_pwreset_invalid">
+    <p i18n:translate="message_pwreset_invalid"
+       i18n:domain="collective.emaillogin">
        Sorry, this appears to be an invalid request. Please make sure you copied
        the URL exactly as it appears in your email and that you entered your
-       user name correctly.
+       email address correctly.
     </p>
 
 </div>
