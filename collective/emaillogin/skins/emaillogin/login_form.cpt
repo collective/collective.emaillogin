@@ -144,10 +144,13 @@ If you do not have an account here, head over to the
                                    checked python:request.get(ac_name, '') and 'checked' or None;"
                    />
 
-            <label for="cb_remember" i18n:translate="label_remember_my_name">Remember my name.</label>
+            <label for="cb_remember"
+                   i18n:domain="collective.emaillogin"
+                   i18n:translate="label_remember_my_email"
+                   >Remember my email address.</label>
 
             <div i18n:translate="help_remember_my_email"
-                 i18n:domain="emaillogin"
+                 i18n:domain="collective.emaillogin"
                  class="formHelp">
                 Check this to have your email address filled in automatically when you log in later.
             </div>

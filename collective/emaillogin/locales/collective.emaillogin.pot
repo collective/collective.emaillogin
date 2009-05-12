@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2009-05-12 13:56+0000\n"
+"POT-Creation-Date: 2009-05-12 14:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,6 +27,26 @@ msgstr ""
 
 #: ./skins/emaillogin/login_form_validate.vpy:38
 msgid "Please enter your email address."
+msgstr ""
+
+#. Default: "If this will not work for you (for example, if your email address has changed), contact the ${site_admin}."
+#: ./skins/emaillogin/mail_password_form.pt:57
+msgid "description_lost_password_mail_admin"
+msgstr ""
+
+#. Default: "Check this to have your email address filled in automatically when you log in later."
+#: ./skins/emaillogin/login_form.cpt:152
+msgid "help_remember_my_email"
+msgstr ""
+
+#. Default: "My email address is"
+#: ./skins/emaillogin/mail_password_form.pt:35
+msgid "label_my_email_address_is"
+msgstr ""
+
+#. Default: "Remember my email address."
+#: ./skins/emaillogin/login_form.cpt:147
+msgid "label_remember_my_email"
 msgstr ""
 
 #. Default: "The email address you selected is already in use or is not valid as login name. Please choose another."

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.emaillogin 0.5\n"
-"POT-Creation-Date: 2009-05-12 13:56+0000\n"
+"POT-Creation-Date: 2009-05-12 14:54+0000\n"
 "PO-Revision-Date: 2009-05-12 15:58 +0200\n"
 "Last-Translator: Maurits van Rees <m.van.rees@zestsoftware.nl>\n"
 "Language-Team: Zest Software <info@zestsoftware.nl>\n"
@@ -26,6 +26,26 @@ msgstr "Login mislukt. Wachtwoord is hoofdlettergevoelig. Controleer of de Caps 
 #: ./skins/emaillogin/login_form_validate.vpy:38
 msgid "Please enter your email address."
 msgstr "Vul uw e-mailadres in."
+
+#. Default: "If this will not work for you (for example, if your email address has changed), contact the ${site_admin}."
+#: ./skins/emaillogin/mail_password_form.pt:57
+msgid "description_lost_password_mail_admin"
+msgstr "Als dit niet gaat werken voor u (bijvoorbeeld als uw e-mailadres is veranderd), neem dan contact op met de ${site_admin}."
+
+#. Default: "Check this to have your email address filled in automatically when you log in later."
+#: ./skins/emaillogin/login_form.cpt:152
+msgid "help_remember_my_email"
+msgstr "De keuze  'Mijn e-mailadres onthouden' maakt een cookie aan met het e-mailadres. Bij een volgende login zal het e-mailadres reeds ingevuld zijn."
+
+#. Default: "My email address is"
+#: ./skins/emaillogin/mail_password_form.pt:35
+msgid "label_my_email_address_is"
+msgstr "Mijn e-mailadres is"
+
+#. Default: "Remember my email address."
+#: ./skins/emaillogin/login_form.cpt:147
+msgid "label_remember_my_email"
+msgstr "Mijn e-mailadres onthouden"
 
 #. Default: "The email address you selected is already in use or is not valid as login name. Please choose another."
 #: ./skins/emaillogin/join_form_validate.vpy:50
