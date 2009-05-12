@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2009-05-12 14:54+0000\n"
+"POT-Creation-Date: 2009-05-12 15:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,6 +37,11 @@ msgstr ""
 #. Default: "Check this to have your email address filled in automatically when you log in later."
 #: ./skins/emaillogin/login_form.cpt:152
 msgid "help_remember_my_email"
+msgstr ""
+
+#. Default: "Enter your user email address for verification."
+#: ./skins/emaillogin/pwreset_form.cpt:40
+msgid "help_verify_email"
 msgstr ""
 
 #. Default: "My email address is"
