@@ -1,5 +1,7 @@
 import re
+from smtplib import SMTPRecipientsRefused
 from Products.CMFPlone.RegistrationTool import RegistrationTool
+from Products.CMFPlone.RegistrationTool import _checkEmail
 from Products.CMFCore.MemberDataTool import MemberData
 from Products.CMFCore.permissions import SetOwnProperties
 from Products.CMFCore.utils import getToolByName
@@ -68,7 +70,7 @@ def initialize(context):
         regtool = getToolByName(self, 'portal_registration')
         if not regtool.isMemberIdAllowed(loginname):
             raise ValueError(_(
-                    'message_user_name_not_valid', 
+                    'message_user_name_not_valid',
                     u"User name is not valid, or already in use."))
         userfolder = self.acl_users.source_users
         try:
@@ -78,6 +80,63 @@ def initialize(context):
         else:
             # let's stay a little vague here, don't give away too much info
             raise ValueError(_(
-                    'message_user_name_not_valid', 
+                    'message_user_name_not_valid',
                     u"User name is not valid, or already in use."))
     MemberData.validateLoginName = validateLoginName
+
+    # We need to change the mailPassword method of the registration
+    # tool too, otherwise users can only reset their password by
+    # entering their initial email address, not their current one.
+    def mailPassword(self, forgotten_userid, REQUEST):
+        """ Wrapper around mailPassword """
+        membership = getToolByName(self, 'portal_membership')
+        if not membership.checkPermission('Mail forgotten password', self):
+            raise Unauthorized, "Mailing forgotten passwords has been disabled"
+
+        utils = getToolByName(self, 'plone_utils')
+        member = membership.getMemberById(forgotten_userid)
+
+        if member is None:
+            raise ValueError, 'The username you entered could not be found'
+
+        # assert that we can actually get an email address, otherwise
+        # the template will be made with a blank To:, this is bad
+        email = member.getProperty('email')
+        if not email:
+            raise ValueError('That user does not have an email address.')
+        else:
+            # add the single email address
+            if not utils.validateSingleEmailAddress(email):
+                raise ValueError, 'The email address did not validate'
+        check, msg = _checkEmail(email)
+        if not check:
+            raise ValueError, msg
+
+        # Rather than have the template try to use the mailhost, we will
+        # render the message ourselves and send it from here (where we
+        # don't need to worry about 'UseMailHost' permissions).
+        reset_tool = getToolByName(self, 'portal_password_reset')
+        reset = reset_tool.requestReset(forgotten_userid)
+
+
+        email_charset = getattr(self, 'email_charset', 'UTF-8')
+        mail_text = self.mail_password_template( self
+                                               , REQUEST
+                                               , member=member
+                                               , reset=reset
+                                               , password=member.getPassword()
+                                               , charset=email_charset
+                                               )
+        if isinstance(mail_text, unicode):
+            mail_text = mail_text.encode(email_charset)
+        host = self.MailHost
+        try:
+            host.send( mail_text )
+
+            return self.mail_password_response( self, REQUEST )
+        except SMTPRecipientsRefused:
+            # Don't disclose email address on failure
+            raise SMTPRecipientsRefused('Recipient address rejected by server')
+
+    # Commented out for the moment:
+    #RegistrationTool.mailPassword = mailPassword
