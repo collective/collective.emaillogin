@@ -5,11 +5,12 @@ from Products.CMFPlone.RegistrationTool import _checkEmail
 from Products.CMFCore.MemberDataTool import MemberData
 from Products.CMFCore.permissions import SetOwnProperties
 from Products.CMFCore.utils import getToolByName
+from Products.PasswordResetTool.PasswordResetTool import PasswordResetTool
 from AccessControl import getSecurityManager
 from AccessControl import Unauthorized
 from AccessControl import allow_module
 
-from collective.emaillogin import utils
+from collective.emaillogin import utils as email_utils
 
 import os
 here = os.path.abspath(os.path.dirname(__file__))
@@ -19,7 +20,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 allow_module('collective.emaillogin.utils')
 
 # And we use that factory in this init as well:
-_ = utils.EmailLoginMessageFactory
+_ = email_utils.EmailLoginMessageFactory
 
 
 def initialize(context):
@@ -91,13 +92,15 @@ def initialize(context):
         """ Wrapper around mailPassword """
         membership = getToolByName(self, 'portal_membership')
         if not membership.checkPermission('Mail forgotten password', self):
-            raise Unauthorized, "Mailing forgotten passwords has been disabled"
+            raise Unauthorized("Mailing forgotten passwords has been disabled")
 
         utils = getToolByName(self, 'plone_utils')
-        member = membership.getMemberById(forgotten_userid)
+        # XXX Here is the change compared to the default method.
+        # Try to find this user via the login name.
+        member = email_utils.getMemberByLoginName(self, forgotten_userid)
 
         if member is None:
-            raise ValueError, 'The username you entered could not be found'
+            raise ValueError('The username you entered could not be found')
 
         # assert that we can actually get an email address, otherwise
         # the template will be made with a blank To:, this is bad
@@ -107,10 +110,10 @@ def initialize(context):
         else:
             # add the single email address
             if not utils.validateSingleEmailAddress(email):
-                raise ValueError, 'The email address did not validate'
+                raise ValueError('The email address did not validate')
         check, msg = _checkEmail(email)
         if not check:
-            raise ValueError, msg
+            raise ValueError(msg)
 
         # Rather than have the template try to use the mailhost, we will
         # render the message ourselves and send it from here (where we
@@ -138,5 +141,31 @@ def initialize(context):
             # Don't disclose email address on failure
             raise SMTPRecipientsRefused('Recipient address rejected by server')
 
-    # Commented out for the moment:
-    #RegistrationTool.mailPassword = mailPassword
+    # Apply the patch:
+    RegistrationTool.mailPassword = mailPassword
+
+    # We need to change resetPassword from PasswordResetTool too.
+    # First we save the original with an underscore.
+    PasswordResetTool._resetPassword = PasswordResetTool.resetPassword
+
+    def resetPassword(self, userid, randomstring, password):
+        """Reset the password of this user.
+
+        But the userid will most likely be a login name.
+        """
+        member = email_utils.getMemberByLoginName(self, userid)
+        if member is not None:
+            userid = member.getId()
+        # If no member was found, then the following will likely fail.
+        self._resetPassword(userid, randomstring, password)
+
+    # Apply the patch:
+    PasswordResetTool.resetPassword = resetPassword
+
+    def getValidUser(self, userid):
+        """Returns the member with 'userid' if available and None otherwise."""
+        return email_utils.getMemberByLoginName(
+            self, userid, raise_exceptions=False)
+
+    # Apply the patch:
+    PasswordResetTool.getValidUser = getValidUser
