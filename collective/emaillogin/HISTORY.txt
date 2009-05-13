@@ -5,8 +5,9 @@ Changelog for collective.emaillogin
 0.6 (unreleased)
 ----------------
 
-- Patched some methods in PasswordResetTool and RegistrationTool.
-  Needs some more testing though.  [maurits]
+- Patched some methods in PasswordResetTool and RegistrationTool to
+  make sure you can actually reset your password, even after changing
+  your email address.  [maurits]
 
 - Use email address instead of login/user name in some more spots,
   like the login form and in validation.  [maurits]

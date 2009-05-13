@@ -108,6 +108,11 @@ def initialize(context):
         if member is None:
             raise ValueError('The username you entered could not be found')
 
+        # We use the id member as new forgotten_userid, as in our
+        # patched version of resetPassword we ask for the real member
+        # id too, instead of the login name.
+        forgotten_userid = member.getId()
+
         # assert that we can actually get an email address, otherwise
         # the template will be made with a blank To:, this is bad
         email = member.getProperty('email')
