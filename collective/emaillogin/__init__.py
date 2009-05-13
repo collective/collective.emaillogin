@@ -1,3 +1,4 @@
+import logging
 import re
 from smtplib import SMTPRecipientsRefused
 from Products.CMFPlone.RegistrationTool import RegistrationTool
@@ -14,6 +15,7 @@ from collective.emaillogin import utils as email_utils
 
 import os
 here = os.path.abspath(os.path.dirname(__file__))
+logger = logging.getLogger('collective.emaillogin')
 
 # Allow to import utils.py from restricted python , mostly for the
 # message factory:
@@ -34,6 +36,7 @@ def initialize(context):
     if not enable:
         return
     # XXX rather nasty patch to allow email addresses as username
+    logger.warn('Patching RegistrationTool._ALLOWED_MEMBER_ID_PATTERN')
     RegistrationTool._ALLOWED_MEMBER_ID_PATTERN = re.compile(
         r'^\w[\w\.\-@]+[a-zA-Z]$')
 
@@ -59,6 +62,8 @@ def initialize(context):
         else:
             raise Unauthorized('you need to log in to change your own '
                                'login name')
+
+    logger.warn('Patching MemberData.setLoginName')
     MemberData.setLoginName = setLoginName
 
     # similar method for validation
@@ -83,6 +88,7 @@ def initialize(context):
             raise ValueError(_(
                     'message_user_name_not_valid',
                     u"User name is not valid, or already in use."))
+    logger.warn('Patching MemberData.validateLoginName')
     MemberData.validateLoginName = validateLoginName
 
     # We need to change the mailPassword method of the registration
@@ -141,7 +147,7 @@ def initialize(context):
             # Don't disclose email address on failure
             raise SMTPRecipientsRefused('Recipient address rejected by server')
 
-    # Apply the patch:
+    logger.warn('Patching RegistrationTool.mailPassword')
     RegistrationTool.mailPassword = mailPassword
 
     # We need to change resetPassword from PasswordResetTool too.
@@ -159,7 +165,7 @@ def initialize(context):
         # If no member was found, then the following will likely fail.
         self._resetPassword(userid, randomstring, password)
 
-    # Apply the patch:
+    logger.warn('Patching PasswordResetTool.resetPassword')
     PasswordResetTool.resetPassword = resetPassword
 
     def getValidUser(self, userid):
@@ -167,5 +173,5 @@ def initialize(context):
         return email_utils.getMemberByLoginName(
             self, userid, raise_exceptions=False)
 
-    # Apply the patch:
+    logger.warn('Patching PasswordResetTool.getValidUser')
     PasswordResetTool.getValidUser = getValidUser
