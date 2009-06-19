@@ -63,7 +63,7 @@ def initialize(context):
             raise Unauthorized('you need to log in to change your own '
                                'login name')
 
-    logger.warn('Patching MemberData.setLoginName')
+    logger.warn('Adding method MemberData.setLoginName')
     MemberData.setLoginName = setLoginName
 
     # similar method for validation
@@ -88,7 +88,7 @@ def initialize(context):
             raise ValueError(_(
                     'message_user_name_not_valid',
                     u"User name is not valid, or already in use."))
-    logger.warn('Patching MemberData.validateLoginName')
+    logger.warn('Adding method MemberData.validateLoginName')
     MemberData.validateLoginName = validateLoginName
 
     # We need to change the mailPassword method of the registration
