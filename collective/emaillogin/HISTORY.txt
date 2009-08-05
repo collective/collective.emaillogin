@@ -5,7 +5,7 @@ Changelog for collective.emaillogin
 0.7 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- added german translation [deichi]
 
 
 0.6 (2009-05-13)
