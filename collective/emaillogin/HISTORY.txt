@@ -2,7 +2,7 @@ Changelog for collective.emaillogin
 ===================================
 
 
-0.7 (unreleased)
+0.7 (2010-02-23)
 ----------------
 
 - added german translation [deichi]
