@@ -5,6 +5,12 @@ Changelog for collective.emaillogin
 0.8 (unreleased)
 ----------------
 
+- Removed mail_me functionality from join_form as this claimed to be
+  sending the password, which Plone has not been doing for a long
+  time, if ever.  The backend handling for this was already removed
+  from Plone itself.
+  [maurits]
+
 - Fixed wrong condition and double definition where allowEnterPassword
   meant you were actually *not* allowed to enter a password.  It
   worked fine but was confusingly stated the wrong way around.
