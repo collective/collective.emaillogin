@@ -5,7 +5,10 @@ Changelog for collective.emaillogin
 0.8 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Fixed wrong condition and double definition where allowEnterPassword
+  meant you were actually *not* allowed to enter a password.  It
+  worked fine but was confusingly stated the wrong way around.
+  [maurits]
 
 
 0.7 (2010-02-23)
