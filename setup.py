@@ -11,7 +11,7 @@ setup(name='collective.emaillogin',
       version=version,
       description="Allow logins with email address rather than login name.",
       long_description=history,
-      # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
+      # Get more strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Framework :: Plone",
         "Framework :: Plone :: 3.2",
