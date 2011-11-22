@@ -5,6 +5,11 @@ Changelog for collective.emaillogin
 0.9 (unreleased)
 ----------------
 
+- Changed getMemberByLoginName and ZODBUserManager.authenticateCredentials
+  to explicitly search for the lower case login name if the initial
+  literal search does not work.
+  [maurits]
+
 - Added classifiers for Plone 3.2 and 3.3 in setup.py.
   [maurits]
 

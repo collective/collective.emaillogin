@@ -7,6 +7,8 @@ from Products.CMFCore.MemberDataTool import MemberData
 from Products.CMFCore.permissions import SetOwnProperties
 from Products.CMFCore.utils import getToolByName
 from Products.PasswordResetTool.PasswordResetTool import PasswordResetTool
+from Products.PluggableAuthService.plugins.ZODBUserManager import \
+    ZODBUserManager
 from AccessControl import getSecurityManager
 from AccessControl import Unauthorized
 from AccessControl import allow_module
@@ -132,7 +134,6 @@ def initialize(context):
         reset_tool = getToolByName(self, 'portal_password_reset')
         reset = reset_tool.requestReset(forgotten_userid)
 
-
         email_charset = getattr(self, 'email_charset', 'UTF-8')
         mail_text = self.mail_password_template( self
                                                , REQUEST
@@ -180,3 +181,22 @@ def initialize(context):
 
     logger.warn('Patching PasswordResetTool.getValidUser')
     PasswordResetTool.getValidUser = getValidUser
+
+    ZODBUserManager._ori_authenticateCredentials = \
+        ZODBUserManager.authenticateCredentials
+
+    def authenticateCredentials(self, credentials):
+        result = self._ori_authenticateCredentials(credentials)
+        if result is None:
+            # Try lowercase, but only for e-mail logins.
+            login = credentials.get('login', '')
+            if login:
+                logger.debug("Authentication with %r failed.", login)
+            if '@' in login and login != login.lower():
+                credentials['login'] = login.lower()
+                result = self._ori_authenticateCredentials(credentials)
+                logger.debug("Lower case authentication: %r", result)
+        return result
+
+    logger.warn('Patching ZODBUserManager.authenticateCredentials')
+    ZODBUserManager.authenticateCredentials = authenticateCredentials
