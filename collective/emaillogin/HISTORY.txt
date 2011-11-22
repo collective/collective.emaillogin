@@ -5,6 +5,9 @@ Changelog for collective.emaillogin
 0.9 (unreleased)
 ----------------
 
+- Customized registered.cpy to turn the username to lowercase.
+  [maurits]
+
 - Changed getMemberByLoginName and ZODBUserManager.authenticateCredentials
   to explicitly search for the lower case login name if the initial
   literal search does not work.

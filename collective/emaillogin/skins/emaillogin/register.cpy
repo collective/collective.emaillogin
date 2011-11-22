@@ -11,6 +11,7 @@
 
 from Products.CMFPlone import PloneMessageFactory as PMF
 from ZODB.POSException import ConflictError
+from collective.emaillogin.utils import EmailLoginMessageFactory as _
 
 REQUEST = context.REQUEST
 
@@ -18,6 +19,11 @@ portal = context.portal_url.getPortalObject()
 portal_registration = context.portal_registration
 
 username = REQUEST['username']
+# CHANGE: force lowercase email
+username_changed = '@' in username and username != username.lower()
+if username_changed:
+    username = username.lower()
+    REQUEST.set('username', username)
 
 password=REQUEST.get('password') or portal_registration.generatePassword()
 
@@ -67,5 +73,12 @@ if came_from_prefs:
 
 from Products.CMFPlone.utils import transaction_note
 transaction_note('%s registered' % username)
+
+if username_changed:
+    # Add a portal status message.  Need to do it here, as otherwise
+    # the cookie with this message seems to be removed before it gets
+    # to the user.
+    context.plone_utils.addPortalMessage(
+        _(u'We have lowercased your e-mail address.'), 'warning')
 
 return state
