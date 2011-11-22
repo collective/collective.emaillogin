@@ -5,7 +5,8 @@ Changelog for collective.emaillogin
 0.9 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Added classifiers for Plone 3.2 and 3.3 in setup.py.
+  [maurits]
 
 
 0.8 (2010-05-18)
