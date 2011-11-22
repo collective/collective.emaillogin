@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.emaillogin 0.7dev\n"
-"POT-Creation-Date: 2009-08-05 07:55+0000\n"
+"POT-Creation-Date: 2011-11-22 11:13+0000\n"
 "PO-Revision-Date: 1009-08-04 09:44 +0200\n"
 "Last-Translator: Sven Deichmann <deichmann@werkbank.com>\n"
 "Language-Team: German Translation Team <plone-i18n@lists.sourceforge.net>\n"
@@ -20,6 +20,7 @@ msgid "Email address not found."
 msgstr "E-Mail-Adresse nicht gefunden."
 
 #: ./skins/emaillogin/logged_in.cpy:19
+#: ./skins/emaillogin/login_form_validate.vpy:48
 msgid "Login failed. Password is case sensitive, check that caps lock is not enabled."
 msgstr "Login fehlgeschlagen. Groß-/Kleinschreibung wird beachtet. Prüfen Sie, ob evtl. die Feststelltaste gedrückt ist."
 
@@ -59,6 +60,7 @@ msgstr "Meine E-Mail-Adresse merken."
 
 #. Default: "The email address you selected is already in use or is not valid as login name. Please choose another."
 #: ./skins/emaillogin/join_form_validate.vpy:50
+#: ./skins/emaillogin/validate_personalize.vpy:54
 msgid "message_email_in_use"
 msgstr "Die E-Mail-Adresse, die Sie ausgewählt haben wird bereits verwendet oder ist als Login ungeeignet. Bitte verwenden Sie eine andere."
 

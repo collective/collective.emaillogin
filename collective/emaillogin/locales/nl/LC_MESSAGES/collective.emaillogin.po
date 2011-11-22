@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.emaillogin 0.5\n"
-"POT-Creation-Date: 2009-08-05 07:55+0000\n"
+"POT-Creation-Date: 2011-11-22 11:13+0000\n"
 "PO-Revision-Date: 2009-05-12 15:58 +0200\n"
 "Last-Translator: Maurits van Rees <m.van.rees@zestsoftware.nl>\n"
 "Language-Team: Zest Software <info@zestsoftware.nl>\n"
@@ -20,6 +20,7 @@ msgid "Email address not found."
 msgstr "E-mail address niet gevonden"
 
 #: ./skins/emaillogin/logged_in.cpy:19
+#: ./skins/emaillogin/login_form_validate.vpy:48
 msgid "Login failed. Password is case sensitive, check that caps lock is not enabled."
 msgstr "Login mislukt. Wachtwoord is hoofdlettergevoelig. Controleer of de Caps Lock niet is ingeschakeld."
 
@@ -59,6 +60,7 @@ msgstr "Mijn e-mailadres onthouden"
 
 #. Default: "The email address you selected is already in use or is not valid as login name. Please choose another."
 #: ./skins/emaillogin/join_form_validate.vpy:50
+#: ./skins/emaillogin/validate_personalize.vpy:54
 msgid "message_email_in_use"
 msgstr "Het opgegeven e-mailadres is al in gebruik of is niet geldig als loginnaam. Kies alstublieft een andere."
 
