@@ -34,7 +34,7 @@ password=REQUEST.get('password') or portal_registration.generatePassword()
 # for more info. (rohrer 2004-10-24)
 try:
     portal_registration.addMember(username, password, properties=REQUEST, REQUEST=context.REQUEST)
-except AttributeError:
+except (AttributeError, ValueError):
     state.setError('username', PMF(u'The login name you selected is already in use or is not valid. Please choose another.'))
     context.plone_utils.addPortalMessage(PMF(u'Please correct the indicated errors.'), 'error')
     return state.set(status='failure')
