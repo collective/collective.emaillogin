@@ -1,6 +1,3 @@
-- Add tests.  There are some tests in a customer package of Zest
-  Software.
-
 - Show e-mail address instead of login name in the login portlet.
   I tried something with IThemeSpecific but failed.
 
