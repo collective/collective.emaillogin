@@ -10,7 +10,7 @@ Changelog for collective.emaillogin
   registered.cpy
   [maurits]
 
-- Customized registered.cpy to turn the username to lowercase.
+- In join_form_validate.vpy turn the e-mail address to lowercase.
   [maurits]
 
 - Changed getMemberByLoginName and ZODBUserManager.authenticateCredentials

@@ -22,11 +22,16 @@ def notallowed(field):
     state.setError(field, PMF(u'This username is reserved. Please choose a different name.'), 'not_allowed')
 
 portal = context.portal_url.getPortalObject()
+REQUEST = context.REQUEST
 
 username = ''
 if not email:
     missing('email')
 else:
+    # force lowercase email
+    if email != email.lower():
+        email = email.lower()
+        REQUEST.set('email', email)
     username = email
     if username == portal.getId():
         notallowed('email')
