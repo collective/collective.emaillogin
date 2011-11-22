@@ -9,7 +9,7 @@
 ##title=Register a User
 ##
 
-from Products.CMFPlone import PloneMessageFactory as _
+from Products.CMFPlone import PloneMessageFactory as PMF
 from ZODB.POSException import ConflictError
 
 REQUEST = context.REQUEST
@@ -29,8 +29,8 @@ password=REQUEST.get('password') or portal_registration.generatePassword()
 try:
     portal_registration.addMember(username, password, properties=REQUEST, REQUEST=context.REQUEST)
 except AttributeError:
-    state.setError('username', _(u'The login name you selected is already in use or is not valid. Please choose another.'))
-    context.plone_utils.addPortalMessage(_(u'Please correct the indicated errors.'), 'error')
+    state.setError('username', PMF(u'The login name you selected is already in use or is not valid. Please choose another.'))
+    context.plone_utils.addPortalMessage(PMF(u'Please correct the indicated errors.'), 'error')
     return state.set(status='failure')
 
 if portal.validate_email or REQUEST.get('mail_me', 0):
@@ -48,13 +48,13 @@ if portal.validate_email or REQUEST.get('mail_me', 0):
         state.set(came_from='login_success')
         if portal.validate_email:
             context.acl_users.userFolderDelUsers([username,], REQUEST=context.REQUEST)
-            msg = _(u'status_fatal_password_mail',
+            msg = PMF(u'status_fatal_password_mail',
                     default=u'Failed to create your account: we were unable to send your password to your email address: ${address}',
                     mapping={u'address' : str(err)})
             context.plone_utils.addPortalMessage(msg, 'error')
             return state.set(status='failure')
         else:
-            msg = _(u'status_nonfatal_password_mail',
+            msg = PMF(u'status_nonfatal_password_mail',
                     default=u'You account has been created, but we were unable to send your password to your email address: ${address}',
                     mapping={u'address' : str(err)})
             context.plone_utils.addPortalMessage(msg, 'error')
@@ -62,7 +62,7 @@ if portal.validate_email or REQUEST.get('mail_me', 0):
 state.set(came_from=REQUEST.get('came_from','login_success'))
 
 if came_from_prefs:
-    context.plone_utils.addPortalMessage(_(u'User added.'))
+    context.plone_utils.addPortalMessage(PMF(u'User added.'))
     state.set(status='prefs')
 
 from Products.CMFPlone.utils import transaction_note
