@@ -42,3 +42,11 @@
        after getMemberByLoginName/authenticateCredentials change: STILL FAILS
    - Manager changes your email in preferences:
      - FAILS: login name is not changed as well.
+
+- Migration of mixed case login names:
+  <UserManager at /plone/acl_users/source_users>
+  walk through _login_to_userid.items()
+  and _userid_to_login here.
+  Use updateUser(self, user_id, login_name) there.
+  But should probably update the e-mail address too then.
+

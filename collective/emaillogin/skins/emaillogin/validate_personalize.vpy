@@ -37,6 +37,10 @@ username = ''
 if not email:
     missing('email')
 else:
+    # force lowercase email
+    if email != email.lower():
+        email = email.lower()
+        context.REQUEST.set('email', email)
     username = email
     if username == portal.getId():
         notallowed('email')

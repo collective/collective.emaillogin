@@ -5,6 +5,9 @@ Changelog for collective.emaillogin
 0.9 (unreleased)
 ----------------
 
+- In validate_personalize.vpy turn the e-mail address to lowercase.
+  [maurits]
+
 - Patch Products.PlonePAS.tools.membership.MembershipTool.addMember to
   always add the member as lowercase, also when not called from
   registered.cpy
