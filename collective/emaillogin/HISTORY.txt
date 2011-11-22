@@ -5,6 +5,11 @@ Changelog for collective.emaillogin
 0.9 (unreleased)
 ----------------
 
+- Patch Products.PlonePAS.tools.membership.MembershipTool.addMember to
+  always add the member as lowercase, also when not called from
+  registered.cpy
+  [maurits]
+
 - Customized registered.cpy to turn the username to lowercase.
   [maurits]
 

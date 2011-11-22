@@ -6,6 +6,7 @@ from Products.CMFPlone.RegistrationTool import _checkEmail
 from Products.CMFCore.MemberDataTool import MemberData
 from Products.CMFCore.permissions import SetOwnProperties
 from Products.CMFCore.utils import getToolByName
+from Products.PlonePAS.tools.membership import MembershipTool
 from Products.PasswordResetTool.PasswordResetTool import PasswordResetTool
 from Products.PluggableAuthService.plugins.ZODBUserManager import \
     ZODBUserManager
@@ -200,3 +201,15 @@ def initialize(context):
 
     logger.warn('Patching ZODBUserManager.authenticateCredentials')
     ZODBUserManager.authenticateCredentials = authenticateCredentials
+
+    MembershipTool._ori_addMember = MembershipTool.addMember
+
+    def addMember(self, id, password, roles, domains, properties=None):
+        if '@' in id and id != id.lower():
+            logger.info("Going to add member with %r lowercased.", id)
+            id = id.lower()
+        return self._ori_addMember(id, password, roles, domains,
+                                   properties=properties)
+
+    logger.warn('Patching MembershipTool.addMember')
+    MembershipTool.addMember = addMember
