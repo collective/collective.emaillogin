@@ -108,9 +108,15 @@ def initialize(context):
             raise Unauthorized("Mailing forgotten passwords has been disabled")
 
         utils = getToolByName(self, 'plone_utils')
-        # XXX Here is the change compared to the default method.
-        # Try to find this user via the login name.
-        member = email_utils.getMemberByLoginName(self, forgotten_userid)
+        # XXX Here is the change compared to the default method.  Try
+        # to find this user via the login name.  In fact, we REFUSE to
+        # find a user by id, as in that case the password reset may
+        # work, but we could fail to login.  Especially this is the
+        # case when the user has registered with old@example.org,
+        # changed this to new@example.org and now tries to reset the
+        # password for old@example.org.
+        member = email_utils.getMemberByLoginName(self, forgotten_userid,
+                                                  allow_userid=False)
 
         if member is None:
             raise ValueError('The username you entered could not be found')

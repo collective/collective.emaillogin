@@ -5,6 +5,15 @@ Changelog for collective.emaillogin
 0.9 (unreleased)
 ----------------
 
+- In the mailPassword method explicitly disallow looking for a member
+  with the given forgotten user id when this is an e-mail address.  We
+  only search for users with that e-mail address as login name.  This
+  only has an effect when you have changed your e-mail address to
+  something really different (instead of just a change in the case).
+  Without this change, you could reset your password with your old
+  address, but could not login with that address.
+  [maurits]
+
 - Refactored authenticateCredentials.  This avoids getting a message
   stating you are logged in when in fact you are not logged in.
   [maurits]

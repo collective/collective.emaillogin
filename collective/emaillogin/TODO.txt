@@ -53,3 +53,36 @@
   Use updateUser(self, user_id, login_name) there.
   But should probably update the e-mail address too then.
   DONE.
+
+
+Trying again
+
+Registered with mixed case, UPPER@example.org:
+
+- initial password reset:
+   - automatically lowercased to upper@example.com, works
+
+- login:
+   - lower case: works
+   - mixed case: works
+   - upper case: works
+
+- change email in preferences and login with that new email:
+  - completely different address: works
+
+CHANGED to new@example.org
+
+- login:
+   - lower case new: works
+   - mixed case new: works
+   - lower case old: fails, but that is fine
+   - mixed case old: fails, but that is fine
+
+- password reset via email:
+   - lower case new: works
+   - mixed case new: works
+   - lower case old: fails, but that is fine
+   - mixed case old: fails, but that is fine
+
+- Manager changes your email in preferences:
+  works

@@ -26,19 +26,26 @@ def _searchMemberByLoginName(context, login_name, raise_exceptions=True):
     return member
 
 
-def getMemberByLoginName(context, login_name, raise_exceptions=True):
+def getMemberByLoginName(context, login_name, raise_exceptions=True,
+                         allow_userid=True):
     """Get a member by his login name.
 
     If raise_exceptions is False, we silently return None.
+
+    If allow_userid is True, we return the member with the login_name
+    as userid when found.  When there is no '@' in the login_name we
+    do the same.
     """
     membership = getToolByName(context, 'portal_membership')
+    member = None
     # First the easy case: it may be a userid after all.
-    member = membership.getMemberById(login_name)
+    if allow_userid or not '@' in login_name:
+        member = membership.getMemberById(login_name)
 
     if member is not None:
         return member
     # Explicitly try lower case, but only for e-mail logins.
-    if '@' in login_name and login_name != login_name.lower():
+    if allow_userid and '@' in login_name and login_name != login_name.lower():
         member = membership.getMemberById(login_name.lower())
         if member is not None:
             return member
