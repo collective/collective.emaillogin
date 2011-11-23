@@ -189,16 +189,22 @@ def initialize(context):
         ZODBUserManager.authenticateCredentials
 
     def authenticateCredentials(self, credentials):
+        login = credentials.get('login', '')
+        if (not login) or ('@' not in login) or (login == login.lower()):
+            # Nothing special we can do here.
+            return self._ori_authenticateCredentials(credentials)
+
+        # So at this point we have e-mail address as login and it is
+        # not lowercase.  We try to login with lowercase first.
+        ori_login = login
+        credentials['login'] = login.lower()
         result = self._ori_authenticateCredentials(credentials)
+        logger.debug("Lower case authentication: %r", result)
         if result is None:
-            # Try lowercase, but only for e-mail logins.
-            login = credentials.get('login', '')
-            if login:
-                logger.debug("Authentication with %r failed.", login)
-            if '@' in login and login != login.lower():
-                credentials['login'] = login.lower()
-                result = self._ori_authenticateCredentials(credentials)
-                logger.debug("Lower case authentication: %r", result)
+            # Try the original login.
+            credentials['login'] = ori_login
+            result = self._ori_authenticateCredentials(credentials)
+            logger.debug("Original case authentication: %r", result)
         return result
 
     logger.warn('Patching ZODBUserManager.authenticateCredentials')

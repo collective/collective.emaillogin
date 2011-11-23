@@ -17,6 +17,7 @@
        after migration: NOW WORKS
      - mixed case: works
        after migration: NOW FAILS
+       after another authenticateCredentials change: NOW WORKS
      - upper case: FAILS
        after getMemberByLoginName/authenticateCredentials change: STILL FAILS
        after migration: NOW WORKS
@@ -51,4 +52,4 @@
   and _userid_to_login here.
   Use updateUser(self, user_id, login_name) there.
   But should probably update the e-mail address too then.
-
+  DONE.

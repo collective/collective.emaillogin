@@ -5,6 +5,12 @@ Changelog for collective.emaillogin
 0.9 (unreleased)
 ----------------
 
+- In authenticateCredentials first search for a lowercase match when
+  handling an e-mail address; fall back to an exact match when this
+  fails.  Do not do anything special when the login name is not an
+  email address or is already lowercase.
+  [maurits]
+
 - Added upgrade step to migrate all existing users to have a lowercase
   login name (when their e-mail address is used as login name).
   [maurits]
