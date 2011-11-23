@@ -1,8 +1,10 @@
 import logging
 import re
 from smtplib import SMTPRecipientsRefused
+from Products.CMFPlone.PloneTool import PloneTool
 from Products.CMFPlone.RegistrationTool import RegistrationTool
 from Products.CMFPlone.RegistrationTool import _checkEmail
+from Products.CMFPlone.utils import safe_hasattr
 from Products.CMFCore.MemberDataTool import MemberData
 from Products.CMFCore.permissions import SetOwnProperties
 from Products.CMFCore.utils import getToolByName
@@ -213,3 +215,42 @@ def initialize(context):
 
     logger.warn('Patching MembershipTool.addMember')
     MembershipTool.addMember = addMember
+
+    PloneTool._ori_setMemberProperties = PloneTool.setMemberProperties
+
+    def setMemberProperties(self, member, REQUEST=None, **properties):
+        # Set the member properties.  When changing the e-mail
+        # address, also update the login name.  And make the e-mail
+        # address lowercase.
+        pas = getToolByName(self, 'acl_users')
+        if safe_hasattr(member, 'getId'):
+            member_id = member.getId()
+        else:
+            member_id = member
+        user = pas.getUserById(member_id)
+        update_login_name = False
+        if 'email' in properties:
+            new_email = properties.get('email')
+            if new_email != new_email.lower():
+                new_email = new_email.lower()
+                properties['email'] = new_email
+                if REQUEST is not None and 'email' in REQUEST:
+                    REQUEST['email'] = new_email
+            old_email = user.getProperty('email')
+            if new_email != old_email:
+                update_login_name = True
+        user.setProperties(**properties)
+        if update_login_name:
+            logger.info("Updating login name from %s to %s", old_email,
+                        new_email)
+            userfolder = pas.source_users
+            try:
+                userfolder.updateUser(member_id, new_email)
+            except KeyError:
+                raise ValueError('you are not a Plone member (you are '
+                                 'probably registered on the root user '
+                                 'folder, please notify an administrator if '
+                                 'this is unexpected)')
+
+    logger.warn('Patching PloneTool.setMemberProperties')
+    PloneTool.setMemberProperties = setMemberProperties

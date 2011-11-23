@@ -5,6 +5,11 @@ Changelog for collective.emaillogin
 0.9 (unreleased)
 ----------------
 
+- Patch PloneTool.setMemberProperties to always set the e-mail address
+  to lower case and to update the login name when the e-mail address
+  changes.
+  [maurits]
+
 - In validate_personalize.vpy turn the e-mail address to lowercase.
   [maurits]
 
