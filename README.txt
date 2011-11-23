@@ -47,27 +47,54 @@ login names to lower case, for those login names that are already
 e-mail addresses.
 
 
-Problems
---------
+Gotchas
+-------
 
-The solution is far from perfect, for instance on places where the
-userid is displayed the original (underlying) id is shown, which works
-fine until the email address is overwritten - once this is done the
-old email address will be displayed rather than the new one.  There
-may be some more spots in Plone that for example search only for users
-by id so when you use that to search on login name this may fail.
-Also, there are spots in the Plone or CMF or Zope code that have a
-userid as input but use it as login name or the other way around.
+No, these are not bugs.  Or if they are bugs, then they are bugs that
+are too hard to fix without introducing other bugs.  They might be
+unexpected though, so we call them gotchas.
 
-There were some more issues, but we think those have been fixed.
+- Since version 1.0, whenever an e-mail address is set, we
+  automatically convert it to lowercase.  You cannot set an e-mail
+  address to upper or mixed case.  When logging in or resetting a
+  password the case does not need to match: we look for the given
+  login but also for the lowercased login.
 
-Note that when you registered with old@example.org and changed that to
-new@example.org, you can no longer login with your old address.  You
-can only login with your current e-mail address, though the case
-(upper, lower, mixed) should not matter anymore.
+- As an administrator, when you change the login name of a user in the
+  ZMI, this does not update the email.
 
-Since version 1.0, whenever an e-mail address is set, we convert it to
-lowercase.
+- When you register with original@example.org and change this to
+  new@example.org, you can no longer login with your original address.
+  You can only login with your current e-mail address, though the case
+  (upper, lower, mixed) should not matter anymore.
+
+- The initial e-mail address is used as userid.  This id never ever
+  changes. In places where the userid is displayed this original
+  userid is shown, which is normally fine until the email address is
+  overwritten -- once this is done the *original* email address will
+  be displayed rather than the new one.  (Plone 4 fixes this in the
+  core.)  There may be some more spots in Plone that for example
+  search only for users by id so when you use that to search on login
+  name this may fail.  Also, there are spots in the Plone or CMF or
+  Zope code that have a userid as input but use it as login name or
+  the other way around so be careful when you start hacking yourself.
+
+- If you register with one@example.org, then change it to
+  two@example.org, then no one can register a new user with
+  one@example.org or change the e-mail address of an existing user to
+  one@example.org.  This is because it will forever be used as
+  userid.  Note that when you now change your address to
+  three@example.org, your intermediate address of two@example.org is
+  free for the taking.
+
+- When you change your e-mail address, you do *not* get a confirmation
+  e-mail to check if you did not make any typos and it is a real
+  address.  This means you will not be able to login if you do not
+  remember this typo; a password reset will then also not work.  This
+  could be considered a problem of Plone in general and not specific
+  for this add-on, though we are hit harder by it.  Might be a nice
+  candidate for a PLIP (PLone Improvement Proposal) or first an extra
+  add-on.
 
 
 Future
