@@ -14,10 +14,13 @@
    - login:
      - lower case: FAILS
        after getMemberByLoginName/authenticateCredentials change: STILL FAILS
+       after migration: NOW WORKS
      - mixed case: works
+       after migration: NOW FAILS
      - upper case: FAILS
        after getMemberByLoginName/authenticateCredentials change: STILL FAILS
-   - change email in preferences and login with that new email:
+       after migration: NOW WORKS
+  - change email in preferences and login with that new email:
      - lower case: works
      - mixed case: works
      - upper case: works
