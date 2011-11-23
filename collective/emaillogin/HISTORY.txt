@@ -2,7 +2,7 @@ Changelog for collective.emaillogin
 ===================================
 
 
-1.0 (unreleased)
+1.0 (2011-11-23)
 ----------------
 
 - In the mailPassword method explicitly disallow looking for a member
