@@ -43,4 +43,4 @@ def migrate_to_lowercase(context):
         user.setProperties(email=new_login)
         userfolder.updateUser(user_id, new_login)
         logger.info("User id %s now has lowercase login name and e-mail "
-                    "address: %s", user_id, new_login)
+                    "address: %s (was: %s)", user_id, new_login, email)
