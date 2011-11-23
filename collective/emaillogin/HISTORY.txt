@@ -5,6 +5,10 @@ Changelog for collective.emaillogin
 0.9 (unreleased)
 ----------------
 
+- Added upgrade step to migrate all existing users to have a lowercase
+  login name (when their e-mail address is used as login name).
+  [maurits]
+
 - Patch PloneTool.setMemberProperties to always set the e-mail address
   to lower case and to update the login name when the e-mail address
   changes.

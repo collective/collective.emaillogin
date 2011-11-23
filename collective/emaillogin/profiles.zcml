@@ -11,4 +11,12 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
+  <genericsetup:upgradeStep
+      title="Migrate login names to lower case"
+      description="Apply our own workflow.xml file."
+      source="1"
+      destination="2"
+      handler="collective.emaillogin.migration.migrate_to_lowercase"
+      profile="collective.emaillogin:default" />
+
 </configure>

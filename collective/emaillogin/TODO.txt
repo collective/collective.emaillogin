@@ -21,10 +21,10 @@
      - lower case: works
      - mixed case: works
      - upper case: works
-   - login with your original user id (email) after the change:
-     - FAILS
-   - Manager changes your email in preferences:
+     - completely different address: works
+  - Manager changes your email in preferences:
      - FAILS: login name is not changed as well.
+       After setMemberProperties change: NOW WORKS
 
  - Registered with LOWER case:
    - password reset via email:
@@ -37,11 +37,10 @@
    - change email in preferences and try login with that new email:
      - lower case: works
      - upper case: works
-   - login with your original user id (email) after the change:
-     - lower case: FAILS
-       after getMemberByLoginName/authenticateCredentials change: STILL FAILS
-   - Manager changes your email in preferences:
+     - completely different address: works
+ - Manager changes your email in preferences:
      - FAILS: login name is not changed as well.
+       After setMemberProperties change: NOW WORKS
 
 - Migration of mixed case login names:
   <UserManager at /plone/acl_users/source_users>
