@@ -13,6 +13,24 @@ than some additional id, and when the email address changes the login name
 is changed along with it.
 
 
+Installation
+------------
+
+Add it to the eggs of your Plone 3 buildout.  With Plone 3.2.x or
+earlier also add it to the zcml option of your instance.  Install it
+in the Add-ons (Extra Packages) control panel in your Plone Site.
+Installing simply adds a new skin layer named 'emaillogin'.
+
+.. WARNING::
+  A major part of this package works by patching several core
+  Plone and CMF classes.  The patches also apply when you do not have
+  this package installed in your Plone Site.  This may give unwanted
+  results, like changing the login name of a user when his or her e-mail
+  address is changed.  This also means that when you have multiple Plone
+  Sites in one Zope instance, you should either install this package in
+  all of them or not use it at all and remove it from your buildout.
+
+
 Problems
 --------
 
