@@ -1,5 +1,7 @@
 import logging
 import re
+import sha
+from AccessControl import AuthEncoding
 from smtplib import SMTPRecipientsRefused
 from Products.CMFPlone.PloneTool import PloneTool
 from Products.CMFPlone.RegistrationTool import RegistrationTool
@@ -189,23 +191,61 @@ def initialize(context):
         ZODBUserManager.authenticateCredentials
 
     def authenticateCredentials(self, credentials):
-        login = credentials.get('login', '')
-        if (not login) or ('@' not in login) or (login == login.lower()):
-            # Nothing special we can do here.
-            return self._ori_authenticateCredentials(credentials)
+        """ See IAuthenticationPlugin.
 
-        # So at this point we have e-mail address as login and it is
-        # not lowercase.  We try to login with lowercase first.
-        ori_login = login
-        credentials['login'] = login.lower()
-        result = self._ori_authenticateCredentials(credentials)
-        logger.debug("Lower case authentication: %r", result)
-        if result is None:
-            # Try the original login.
-            credentials['login'] = ori_login
-            result = self._ori_authenticateCredentials(credentials)
-            logger.debug("Original case authentication: %r", result)
-        return result
+        o We expect the credentials to be those returned by
+          ILoginPasswordExtractionPlugin.
+        """
+        login = credentials.get('login')
+        password = credentials.get('password')
+
+        if login is None or password is None:
+            return None
+
+        # The original implementation does this, which unhelpfully
+        # falls back to giving the login as userid when the login does
+        # not match a user.  This means you will seem to login: you
+        # get a message "welcome, you are now logged in".  But you are
+        # not actually logged in.
+        #userid = self._login_to_userid.get(login, login)
+
+        # Instead, we do some more checking ourself.
+        userid = None
+        if '@' not in login or login == login.lower():
+            userid = self._login_to_userid.get(login)
+            logger.debug("Standard authentication for %s gives userid %s",
+                         login, userid)
+        else:
+            # So at this point we have e-mail address as login and it
+            # is not lowercase.  We try the given login and then the
+            # lowercase version if nothing is found.
+            userid = self._login_to_userid.get(login)
+            logger.debug("Original case authentication for %s gives "
+                         "userid %r", login, userid)
+            if not userid:
+                login = login.lower()
+                userid = self._login_to_userid.get(login)
+                logger.debug("Lower case authentication for %s gives "
+                             "userid %r", login, userid)
+                if userid:
+                    # Might not be needed, but just in case.
+                    credentials['login'] = login
+        if not userid:
+            return None
+        reference = self._user_passwords.get(userid)
+        if reference is None:
+            return None
+        if AuthEncoding.is_encrypted(reference):
+            if AuthEncoding.pw_validate(reference, password):
+                return userid, login
+
+        # Support previous naive behavior
+        digested = sha.sha(password).hexdigest()
+
+        if reference == digested:
+            return userid, login
+
+        return None
 
     logger.warn('Patching ZODBUserManager.authenticateCredentials')
     ZODBUserManager.authenticateCredentials = authenticateCredentials
