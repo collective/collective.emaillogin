@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-11-23 13:06+0000\n"
+"POT-Creation-Date: 2011-11-23 15:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,7 +72,7 @@ msgid "message_pwreset_invalid"
 msgstr ""
 
 #. Default: "User name is not valid, or already in use."
-#: ./__init__.py:83
+#: ./__init__.py:85
 msgid "message_user_name_not_valid"
 msgstr ""
 
