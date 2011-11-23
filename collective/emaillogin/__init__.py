@@ -146,20 +146,15 @@ def initialize(context):
         reset = reset_tool.requestReset(forgotten_userid)
 
         email_charset = getattr(self, 'email_charset', 'UTF-8')
-        mail_text = self.mail_password_template( self
-                                               , REQUEST
-                                               , member=member
-                                               , reset=reset
-                                               , password=member.getPassword()
-                                               , charset=email_charset
-                                               )
+        mail_text = self.mail_password_template(
+            self, REQUEST, member=member, reset=reset,
+            password=member.getPassword(), charset=email_charset)
         if isinstance(mail_text, unicode):
             mail_text = mail_text.encode(email_charset)
         host = self.MailHost
         try:
-            host.send( mail_text )
-
-            return self.mail_password_response( self, REQUEST )
+            host.send(mail_text)
+            return self.mail_password_response(self, REQUEST)
         except SMTPRecipientsRefused:
             # Don't disclose email address on failure
             raise SMTPRecipientsRefused('Recipient address rejected by server')
