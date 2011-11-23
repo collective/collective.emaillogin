@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.emaillogin 0.5\n"
-"POT-Creation-Date: 2011-11-22 11:13+0000\n"
+"POT-Creation-Date: 2011-11-23 13:06+0000\n"
 "PO-Revision-Date: 2009-05-12 15:58 +0200\n"
 "Last-Translator: Maurits van Rees <m.van.rees@zestsoftware.nl>\n"
 "Language-Team: Zest Software <info@zestsoftware.nl>\n"
@@ -59,8 +59,8 @@ msgid "label_remember_my_email"
 msgstr "Mijn e-mailadres onthouden"
 
 #. Default: "The email address you selected is already in use or is not valid as login name. Please choose another."
-#: ./skins/emaillogin/join_form_validate.vpy:50
-#: ./skins/emaillogin/validate_personalize.vpy:54
+#: ./skins/emaillogin/join_form_validate.vpy:55
+#: ./skins/emaillogin/validate_personalize.vpy:58
 msgid "message_email_in_use"
 msgstr "Het opgegeven e-mailadres is al in gebruik of is niet geldig als loginnaam. Kies alstublieft een andere."
 
@@ -70,7 +70,7 @@ msgid "message_pwreset_invalid"
 msgstr "Deze aanvraag is ongeldig. Zorg ervoor dat u het internetadres zoals het in uw e-mailbericht staat exact heeft gekopieërd en dat u uw e-mailadres correct heeft ingevuld."
 
 #. Default: "User name is not valid, or already in use."
-#: ./__init__.py:78
+#: ./__init__.py:83
 msgid "message_user_name_not_valid"
 msgstr "Gebruikersnaam is niet geldig of al in gebruik"
 

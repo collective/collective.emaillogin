@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.emaillogin 0.7dev\n"
-"POT-Creation-Date: 2011-11-22 11:13+0000\n"
+"POT-Creation-Date: 2011-11-23 13:06+0000\n"
 "PO-Revision-Date: 1009-08-04 09:44 +0200\n"
 "Last-Translator: Sven Deichmann <deichmann@werkbank.com>\n"
 "Language-Team: German Translation Team <plone-i18n@lists.sourceforge.net>\n"
@@ -59,8 +59,8 @@ msgid "label_remember_my_email"
 msgstr "Meine E-Mail-Adresse merken."
 
 #. Default: "The email address you selected is already in use or is not valid as login name. Please choose another."
-#: ./skins/emaillogin/join_form_validate.vpy:50
-#: ./skins/emaillogin/validate_personalize.vpy:54
+#: ./skins/emaillogin/join_form_validate.vpy:55
+#: ./skins/emaillogin/validate_personalize.vpy:58
 msgid "message_email_in_use"
 msgstr "Die E-Mail-Adresse, die Sie ausgewählt haben wird bereits verwendet oder ist als Login ungeeignet. Bitte verwenden Sie eine andere."
 
@@ -70,7 +70,7 @@ msgid "message_pwreset_invalid"
 msgstr "Entschuldigen Sie, aber dies scheint eine ungültige Anfrage zu sein. Bitte stellen Sie sicher, dass sie den URL genau so kopiert haben, wie er in der E-Mail erscheint und dass Sie Ihre E-Mail-Adresse korrekt eingegeben haben."
 
 #. Default: "User name is not valid, or already in use."
-#: ./__init__.py:78
+#: ./__init__.py:83
 msgid "message_user_name_not_valid"
 msgstr "Der Benutzername ist ungültig oder wird bereits verwendet."
 
