@@ -3,6 +3,8 @@ import re
 import sha
 from AccessControl import AuthEncoding
 from smtplib import SMTPRecipientsRefused
+from Products.CMFPlone.MembershipTool import MembershipTool as \
+    PloneMembershipTool
 from Products.CMFPlone.PloneTool import PloneTool
 from Products.CMFPlone.RegistrationTool import RegistrationTool
 from Products.CMFPlone.RegistrationTool import _checkEmail
@@ -10,7 +12,8 @@ from Products.CMFPlone.utils import safe_hasattr
 from Products.CMFCore.MemberDataTool import MemberData
 from Products.CMFCore.permissions import SetOwnProperties
 from Products.CMFCore.utils import getToolByName
-from Products.PlonePAS.tools.membership import MembershipTool
+from Products.PlonePAS.tools.membership import MembershipTool as \
+    PASMembershipTool
 from Products.PasswordResetTool.PasswordResetTool import PasswordResetTool
 from Products.PluggableAuthService.plugins.ZODBUserManager import \
     ZODBUserManager
@@ -251,7 +254,7 @@ def initialize(context):
     logger.warn('Patching ZODBUserManager.authenticateCredentials')
     ZODBUserManager.authenticateCredentials = authenticateCredentials
 
-    MembershipTool._ori_addMember = MembershipTool.addMember
+    PASMembershipTool._ori_addMember = PASMembershipTool.addMember
 
     def addMember(self, id, password, roles, domains, properties=None):
         if '@' in id and id != id.lower():
@@ -260,8 +263,8 @@ def initialize(context):
         return self._ori_addMember(id, password, roles, domains,
                                    properties=properties)
 
-    logger.warn('Patching MembershipTool.addMember')
-    MembershipTool.addMember = addMember
+    logger.warn('Patching PlonePAS.MembershipTool.addMember')
+    PASMembershipTool.addMember = addMember
 
     PloneTool._ori_setMemberProperties = PloneTool.setMemberProperties
 
@@ -301,3 +304,20 @@ def initialize(context):
 
     logger.warn('Patching PloneTool.setMemberProperties')
     PloneTool.setMemberProperties = setMemberProperties
+
+    def testCurrentPassword(self, password):
+        """ test to see if password is current
+
+        Note that this is the version from Plone 3.3.5, which has a
+        fix compared to Plone 3.1.7 that is important to us: it uses
+        getUserName (so the login name) to authenticate the user.
+        """
+        REQUEST = getattr(self, 'REQUEST', {})
+        member = self.getAuthenticatedMember()
+        acl_users = self._findUsersAclHome(member.getUserId())
+        if not acl_users:
+            return 0
+        return acl_users.authenticate(member.getUserName(), password, REQUEST)
+
+    logger.warn('Patching CMFPlone.MembershipTool.testCurrentPassword')
+    PloneMembershipTool.testCurrentPassword = testCurrentPassword

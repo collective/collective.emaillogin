@@ -5,7 +5,12 @@ Changelog for collective.emaillogin
 1.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Patch CMFPlone.MembershipTool.testCurrentPassword to authenticate
+  with the login name.  The code in Plone 3.3.5 itself already works
+  (and is simply copied here), but Plone 3.1.7 has an error that is
+  triggered for us as the user id is not always the same as the login
+  name.
+  [maurits]
 
 
 1.0 (2011-11-23)
