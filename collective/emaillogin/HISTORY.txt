@@ -2,7 +2,7 @@ Changelog for collective.emaillogin
 ===================================
 
 
-1.1 (unreleased)
+1.1 (2011-12-13)
 ----------------
 
 - Patch CMFPlone.MembershipTool.testCurrentPassword to authenticate
