@@ -365,3 +365,32 @@ def initialize(context):
         'Patching '
         'Products.PlonePAS.plugins.cookie_handler.ExtendedCookieAuthHelper')
     ExtendedCookieAuthHelper.login = login
+
+    RegistrationTool._isMemberIdAllowed = RegistrationTool.isMemberIdAllowed
+
+    def isMemberIdAllowed(self, id):
+        # If the member id is already not allowed by default, then we
+        # will not allow it either.
+        standard = self._isMemberIdAllowed(id)
+        if not standard:
+            return standard
+        # When this id is already in use as login name, we do not
+        # accept it as user id either.  Also, in various spots where
+        # isMemberIdAllowed is called, the id is really meant as login
+        # name.
+        membership = getToolByName(self, 'portal_membership')
+        if not membership.isAnonymousUser():
+            member = membership.getAuthenticatedMember()
+            # If our current user name is the same as the requested
+            # id, then this is fine.
+            if member.getUserName() == id:
+                return 1
+        # See if there already is a member with this login name.
+        found = email_utils.getMemberByLoginName(self, id, allow_userid=False,
+                                                 raise_exceptions=False)
+        if found is None:
+            return 1
+        return 0
+
+    logger.warn('Patching RegistrationTool.isMemberIdAllowed')
+    RegistrationTool.isMemberIdAllowed = isMemberIdAllowed

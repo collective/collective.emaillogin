@@ -5,6 +5,14 @@ Changelog for collective.emaillogin
 1.2 (unreleased)
 ----------------
 
+- Patch RegistrationTool.isMemberIdAllowed.  When the id that is
+  passed in is already in use as login name, we do not accept it as
+  user id either.  Also, in various spots where isMemberIdAllowed is
+  called, the id is really meant as login name.
+  Possibly this fix is only needed for Plone 3.1 and earlier, as I am
+  sure I have tested this before on Plone 3.3.6.
+  [maurits]
+
 - Patch the login method from
   Products.PlonePAS.plugins.cookie_handler.ExtendedCookieAuthHelper.
   This is the code from Plone 3.3.6; it is included because Plon 3.1.7
