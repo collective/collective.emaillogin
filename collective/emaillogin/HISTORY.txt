@@ -21,7 +21,7 @@ Changelog for collective.emaillogin
 
 - Patch the login method from
   Products.PlonePAS.plugins.cookie_handler.ExtendedCookieAuthHelper.
-  This is the code from Plone 3.3.6; it is included because Plon 3.1.7
+  This is the code from Plone 3.3.6; it is included because Plone 3.1.7
   does the wrong thing for us here.
   [maurits]
 
