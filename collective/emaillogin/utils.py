@@ -12,6 +12,7 @@ def _searchMemberByLoginName(context, login_name, raise_exceptions=True):
     """
     member = None
     acl = getToolByName(context, 'acl_users')
+    # XXX Try: acl.searchUsers(login=login_name, exact_match=True)
     userids = [user.get('userid') for user in
                acl.searchUsers(login=login_name)
                if user.get('userid')]

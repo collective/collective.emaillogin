@@ -2,6 +2,7 @@ import logging
 import re
 import sha
 from AccessControl import AuthEncoding
+from Acquisition import aq_parent
 from smtplib import SMTPRecipientsRefused
 from Products.CMFPlone.MembershipTool import MembershipTool as \
     PloneMembershipTool
@@ -14,7 +15,10 @@ from Products.CMFCore.permissions import SetOwnProperties
 from Products.CMFCore.utils import getToolByName
 from Products.PlonePAS.tools.membership import MembershipTool as \
     PASMembershipTool
+from Products.PlonePAS.plugins.cookie_handler import ExtendedCookieAuthHelper
 from Products.PasswordResetTool.PasswordResetTool import PasswordResetTool
+from Products.PluggableAuthService.interfaces.authservice \
+        import IPluggableAuthService
 from Products.PluggableAuthService.plugins.ZODBUserManager import \
     ZODBUserManager
 from AccessControl import getSecurityManager
@@ -76,7 +80,7 @@ def initialize(context):
     logger.warn('Adding method MemberData.setLoginName')
     MemberData.setLoginName = setLoginName
 
-    # similar method for validation
+    # similar method for validation; XXX this is seemingly not used though.
     def validateLoginName(self, loginname):
         secman = getSecurityManager()
         if not secman.checkPermission(SetOwnProperties, self):
@@ -321,3 +325,43 @@ def initialize(context):
 
     logger.warn('Patching CMFPlone.MembershipTool.testCurrentPassword')
     PloneMembershipTool.testCurrentPassword = testCurrentPassword
+
+    def login(self):
+        """Set a cookie and redirect to the url that we tried to
+        authenticate against originally.
+
+        Override standard login method to avoid calling
+        'return response.redirect(came_from)' as there is additional
+        processing to ignore known bad come_from templates at
+        login_next.cpy script.
+
+        Note that this is the version from Plone 3.3.6, which has a
+        fix compared to Plone 3.1.7 that is important to us: it uses
+        getUserName (so the login name) instead of the __ac_name to
+        update the credentials of the user.
+        """
+        request = self.REQUEST
+        response = request['RESPONSE']
+
+        password = request.get('__ac_password', '')
+
+        user = getSecurityManager().getUser()
+        login = user.getUserName()
+        user_pas = aq_parent(user)
+
+        if IPluggableAuthService.providedBy(user_pas):
+            # Delegate to the users own PAS if possible
+            user_pas.updateCredentials(request, response, login, password)
+        else:
+            # User does not originate from a PAS user folder, so lets
+            # try to do our own thing.  XXX Perhaps we should do
+            # nothing here; test with pure User Folder!
+            pas_instance = self._getPAS()
+            if pas_instance is not None:
+                pas_instance.updateCredentials(request, response, login,
+                                               password)
+
+    logger.warn(
+        'Patching '
+        'Products.PlonePAS.plugins.cookie_handler.ExtendedCookieAuthHelper')
+    ExtendedCookieAuthHelper.login = login
