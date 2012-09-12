@@ -170,7 +170,7 @@
         <div class="formHelp" i18n:translate="label_password_change_mail">
           A URL will be generated and e-mailed to you; follow the link
           to reach a page where you can change your password and
-          complete the registration process. 
+          complete the registration process.
         </div>
       </div>
 

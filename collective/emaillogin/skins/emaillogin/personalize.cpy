@@ -25,13 +25,13 @@ else:
     visible_ids=1
 REQUEST.set('visible_ids', visible_ids)
 
-if listed is None and REQUEST is not None:    
+if listed is None and REQUEST is not None:
     listed=0
 else:
     listed=1
 REQUEST.set('listed', listed)
 
-if ext_editor is None and REQUEST is not None:    
+if ext_editor is None and REQUEST is not None:
     ext_editor=0
 else:
     ext_editor=1
