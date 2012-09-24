@@ -1,6 +1,4 @@
 from setuptools import setup, find_packages
-import os.path
-
 readme = open('README.txt').read().strip()
 changes = open('CHANGES.rst').read().strip()
 long_description = readme + '\n\n\n' + changes
@@ -12,14 +10,14 @@ setup(name='collective.emaillogin',
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
-        "Framework :: Plone",
-        "Framework :: Plone :: 3.2",
-        "Framework :: Plone :: 3.3",
-        "Framework :: Zope2",
-        "Framework :: Zope3",
-        "Programming Language :: Python",
-        "Topic :: Software Development :: Libraries :: Python Modules",
-        ],
+          "Framework :: Plone",
+          "Framework :: Plone :: 3.2",
+          "Framework :: Plone :: 3.3",
+          "Framework :: Zope2",
+          "Framework :: Zope3",
+          "Programming Language :: Python",
+          "Topic :: Software Development :: Libraries :: Python Modules",
+          ],
       keywords='',
       author='Guido Wesdorp',
       author_email='guido@pragmagik.com',
