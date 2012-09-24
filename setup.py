@@ -4,7 +4,7 @@ changes = open('CHANGES.rst').read().strip()
 long_description = readme + '\n\n\n' + changes
 
 setup(name='collective.emaillogin',
-      version='1.3',
+      version='1.4.dev0',
       description="Allow logins with email address rather than login name.",
       long_description=long_description,
       # Get more strings from
