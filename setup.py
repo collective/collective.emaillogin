@@ -2,11 +2,8 @@ from setuptools import setup, find_packages
 import os.path
 
 readme = open('README.txt').read().strip()
-
-historyfile = os.path.join('collective', 'emaillogin', 'HISTORY.txt')
-history = open(historyfile).read().strip()
-
-long_description = readme + '\n\n\n' + history
+changes = open('CHANGES.rst').read().strip()
+long_description = readme + '\n\n\n' + changes
 
 setup(name='collective.emaillogin',
       version='1.3.dev0',
