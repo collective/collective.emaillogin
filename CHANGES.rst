@@ -2,7 +2,7 @@ Changelog for collective.emaillogin
 ===================================
 
 
-1.3 (unreleased)
+1.3 (2012-09-24)
 ----------------
 
 - Avoid possible circular import for the PloneMembershipTool in
