@@ -4,8 +4,6 @@ import sha
 from AccessControl import AuthEncoding
 from Acquisition import aq_parent
 from smtplib import SMTPRecipientsRefused
-from Products.CMFPlone.MembershipTool import MembershipTool as \
-    PloneMembershipTool
 from Products.CMFPlone.PloneTool import PloneTool
 from Products.CMFPlone.RegistrationTool import RegistrationTool
 from Products.CMFPlone.RegistrationTool import _checkEmail
@@ -13,8 +11,13 @@ from Products.CMFPlone.utils import safe_hasattr
 from Products.CMFCore.MemberDataTool import MemberData
 from Products.CMFCore.permissions import SetOwnProperties
 from Products.CMFCore.utils import getToolByName
+
+# The order for these two is important, as you may get a circular import.
 from Products.PlonePAS.tools.membership import MembershipTool as \
     PASMembershipTool
+from Products.CMFPlone.MembershipTool import MembershipTool as \
+    PloneMembershipTool
+
 from Products.PlonePAS.plugins.cookie_handler import ExtendedCookieAuthHelper
 from Products.PasswordResetTool.PasswordResetTool import PasswordResetTool
 from Products.PluggableAuthService.interfaces.authservice \

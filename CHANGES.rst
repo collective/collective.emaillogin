@@ -5,6 +5,10 @@ Changelog for collective.emaillogin
 1.3 (unreleased)
 ----------------
 
+- Avoid possible circular import for the PloneMembershipTool in
+  PlonePAS and CMFPlone.
+  [maurits]
+
 - Moved to https://github.com/collective/collective.emaillogin
   [maurits]
 
