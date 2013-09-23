@@ -111,3 +111,9 @@ uninstall the package through the UI.  You may need to manually remove
 portal_skins in the ZMI.  Since the package does some patches on
 startup, you should still remove it from the eggs and zcml options of
 your instance, rerun buildout and start your instance again.
+
+Note that on Plone 4.1 through 4.3 you can use the
+`collective.emaillogin4`_ package for a few improvements on top of
+what is already in Plone 4.
+
+.. _`collective.emaillogin4`: https://pypi.python.org/pypi/collective.emaillogin4
