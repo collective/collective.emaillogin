@@ -16,9 +16,10 @@ setup(name='collective.emaillogin',
           "Framework :: Zope2",
           "Framework :: Zope3",
           "Programming Language :: Python",
+          "Programming Language :: Python :: 2.4",
           "Topic :: Software Development :: Libraries :: Python Modules",
           ],
-      keywords='',
+      keywords='email login',
       author='Guido Wesdorp',
       author_email='guido@pragmagik.com',
       url='https://github.com/collective/collective.emaillogin',
@@ -29,7 +30,6 @@ setup(name='collective.emaillogin',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          # -*- Extra requirements: -*-
       ],
       entry_points="""
       # -*- Entry points: -*-
